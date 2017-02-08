@@ -2,6 +2,7 @@ package business.service.component;
 
 import business.service.exceptions.InvalidDate;
 import entity.Quotation;
+import entity.domain.TypeQuotation;
 import org.springframework.stereotype.Component;
 import util.IOUtil;
 
@@ -25,7 +26,27 @@ public class QuotationBCB implements IQuotationProvader{
         try {
             SimpleDateFormat sd = new SimpleDateFormat("yyyyMMdd");
             String content = IOUtil.readTextFileFormURL(URL_BCB_COTACAO + sd.format(date) + ".csv");
-            return new QuotationListCreator(content).create();
+            List<Quotation> quotationList = new QuotationListCreator(content).create();
+
+            Quotation usdQuotation = null;
+            for(Quotation quotation : quotationList){
+                if(quotation.getCurrency().equals("USD")){
+                    usdQuotation = quotation;
+                }
+            }
+
+            if(usdQuotation != null) {
+                Quotation blrQuotation = new Quotation();
+                blrQuotation.setCurrency("BLR");
+                blrQuotation.setSaleRate(1.0);
+                blrQuotation.setPurchaseRate(1.0);
+                blrQuotation.setSaleParity(usdQuotation.getSaleParity());
+                blrQuotation.setPurchaseParity(usdQuotation.getSaleParity());
+                blrQuotation.setDateQuotation(date);
+                blrQuotation.setType(TypeQuotation.A);
+                quotationList.add(blrQuotation);
+            }
+            return quotationList;
         }catch (IOException e){
             throw new InvalidDate("Não existe cotação para data informada");
         }

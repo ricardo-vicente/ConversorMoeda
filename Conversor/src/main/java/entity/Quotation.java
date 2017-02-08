@@ -2,8 +2,10 @@ package entity;
 
 import entity.domain.TypeQuotation;
 
+import javax.persistence.Entity;
 import java.util.Date;
 
+@Entity
 public class Quotation {
     private Integer idCurrency;
     private Date dateQuotation;
