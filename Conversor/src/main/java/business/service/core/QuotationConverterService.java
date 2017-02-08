@@ -12,6 +12,7 @@ import util.DateUtil;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -87,6 +88,7 @@ public class QuotationConverterService implements IQuotationConverterService {
      */
     private BigDecimal convertCurrency(BigDecimal value, Quotation from, Quotation to){
         BigDecimal realValueFrom;
+        BigDecimal returnvalue;
         if(TypeQuotation.A.equals(from.getType())){
             realValueFrom = value.divide(BigDecimal.valueOf(from.getPurchaseParity()), BigDecimal.ROUND_HALF_UP);
         }else {
@@ -94,10 +96,11 @@ public class QuotationConverterService implements IQuotationConverterService {
         }
 
         if(TypeQuotation.A.equals(to.getType())){
-            return  realValueFrom.multiply(BigDecimal.valueOf(to.getSaleParity()));
+            returnvalue =  realValueFrom.multiply(BigDecimal.valueOf(to.getSaleParity()));
         }else {
-            return  realValueFrom.divide(BigDecimal.valueOf(to.getSaleParity()), BigDecimal.ROUND_HALF_UP);
+            returnvalue =  realValueFrom.divide(BigDecimal.valueOf(to.getSaleParity()), BigDecimal.ROUND_HALF_UP);
         }
+        return returnvalue.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
 
