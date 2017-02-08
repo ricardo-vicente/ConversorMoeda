@@ -26,8 +26,6 @@ public class QuotationBCB implements IQuotationProvader{
             SimpleDateFormat sd = new SimpleDateFormat("yyyyMMdd");
             String content = IOUtil.readTextFileFormURL(URL_BCB_COTACAO + sd.format(date) + ".csv");
             return new QuotationListCreator(content).create();
-        }catch (MalformedURLException e){
-            throw new InvalidDate("Não existe cotação para data informada");
         }catch (IOException e){
             throw new InvalidDate("Não existe cotação para data informada");
         }

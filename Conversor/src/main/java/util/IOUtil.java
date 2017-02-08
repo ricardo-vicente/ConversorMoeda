@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class IOUtil {
-    public static String readTextFileFormURL(String url) throws MalformedURLException, IOException{
+    public static String readTextFileFormURL(String url) throws IOException{
             StringBuilder stringBuilder = new StringBuilder();
             URL content = new URL(url);
             BufferedReader in = new BufferedReader(
