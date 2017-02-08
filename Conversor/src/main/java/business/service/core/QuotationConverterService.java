@@ -87,18 +87,18 @@ public class QuotationConverterService implements IQuotationConverterService {
      * @return Valor convertido
      */
     private BigDecimal convertCurrency(BigDecimal value, Quotation from, Quotation to){
-        BigDecimal realValueFrom;
+        BigDecimal doralValueFrom;
         BigDecimal returnvalue;
         if(TypeQuotation.A.equals(from.getType())){
-            realValueFrom = value.divide(BigDecimal.valueOf(from.getPurchaseParity()), BigDecimal.ROUND_HALF_UP);
+            doralValueFrom = value.divide(BigDecimal.valueOf(from.getPurchaseParity()), BigDecimal.ROUND_HALF_UP);
         }else {
-            realValueFrom = value.multiply(BigDecimal.valueOf(from.getPurchaseParity()));
+            doralValueFrom = value.multiply(BigDecimal.valueOf(from.getPurchaseParity()));
         }
 
         if(TypeQuotation.A.equals(to.getType())){
-            returnvalue =  realValueFrom.multiply(BigDecimal.valueOf(to.getSaleParity()));
+            returnvalue =  doralValueFrom.multiply(BigDecimal.valueOf(to.getSaleParity()));
         }else {
-            returnvalue =  realValueFrom.divide(BigDecimal.valueOf(to.getSaleParity()), BigDecimal.ROUND_HALF_UP);
+            returnvalue =  doralValueFrom.divide(BigDecimal.valueOf(to.getSaleParity()), BigDecimal.ROUND_HALF_UP);
         }
         return returnvalue.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
