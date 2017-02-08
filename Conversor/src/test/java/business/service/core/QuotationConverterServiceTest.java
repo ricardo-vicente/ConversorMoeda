@@ -62,7 +62,6 @@ public class QuotationConverterServiceTest {
         quotationConverter.currencyQuotation("USD", "EUR", 50, "XYZ");
     }
 
-
     @Test(expected = InvalidCurrency.class)
       public void currencyQuotationInvalidCurrency1(){
         //FORMATO INVALIDO DE MOEDA
@@ -82,5 +81,4 @@ public class QuotationConverterServiceTest {
         //MOEDA INEXISTENTE
         quotationConverter.currencyQuotation("USD", "ZZZ", 50, "20/11/2014");
     }
-
 }

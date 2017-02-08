@@ -26,27 +26,7 @@ public class QuotationBCB implements IQuotationProvader{
         try {
             SimpleDateFormat sd = new SimpleDateFormat("yyyyMMdd");
             String content = IOUtil.readTextFileFormURL(URL_BCB_COTACAO + sd.format(date) + ".csv");
-            List<Quotation> quotationList = new QuotationListCreator(content).create();
-
-            Quotation usdQuotation = null;
-            for(Quotation quotation : quotationList){
-                if(quotation.getCurrency().equals("USD")){
-                    usdQuotation = quotation;
-                }
-            }
-
-            if(usdQuotation != null) {
-                Quotation blrQuotation = new Quotation();
-                blrQuotation.setCurrency("BLR");
-                blrQuotation.setSaleRate(1.0);
-                blrQuotation.setPurchaseRate(1.0);
-                blrQuotation.setSaleParity(usdQuotation.getSaleParity());
-                blrQuotation.setPurchaseParity(usdQuotation.getSaleParity());
-                blrQuotation.setDateQuotation(date);
-                blrQuotation.setType(TypeQuotation.A);
-                quotationList.add(blrQuotation);
-            }
-            return quotationList;
+            return new QuotationListCreator(content).create();
         }catch (IOException e){
             throw new InvalidDate("Não existe cotação para data informada");
         }
