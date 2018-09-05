@@ -5,6 +5,6 @@ import entity.Quotation;
 import java.util.Date;
 import java.util.List;
 
-public interface IQuotationProvader {
+public interface IQuotationProvider {
     public List<Quotation> getQuotationOfDate(Date date);
 }

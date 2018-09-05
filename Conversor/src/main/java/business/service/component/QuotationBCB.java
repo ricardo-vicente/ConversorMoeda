@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-public class QuotationBCB implements IQuotationProvader{
+public class QuotationBCB implements IQuotationProvider{
     public static final String URL_BCB_COTACAO = "http://www4.bcb.gov.br/Download/fechamento/";
 
     /**
