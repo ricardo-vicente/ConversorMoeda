@@ -16,3 +16,5 @@ O projeto está dividido nos seguintes pacotes: business, entity, persistence, p
   Pacote de classes utilitárias para ser utilizado por toda a aplicação.
 
 Nesta solução encontre-se somente a classe de negócio para a conversão da moeda e os testes unitários para validação da solução. A solução  completa conteria a persistencia da infomação que é consultada no endereço externo, para facilitar posteriores consultas e possíveis indisponibilidades do serviço. E conteria também tela com formulário de consulta.
+
+Teste Commit
